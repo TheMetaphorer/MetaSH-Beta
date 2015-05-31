@@ -1,0 +1,58 @@
+#!/usr/bin/env python3
+
+import os
+import datetime
+import getpass
+import inspect
+import sys
+import difflib
+
+moduleDict = {}
+moduleFuncDict = {}
+availableModules = ['netutils', 'coreutils', 'mathcoms']
+executableDir = os.path.dirname(__file__)
+shellVer = 'b0.1.0'
+print('MetaSH shell v' + shellVer)
+print(datetime.datetime.now().strftime('%Y-%m-%d'))
+
+"""Imports all modules, from the list of available modules."""
+
+for module in os.listdir(executableDir):
+    if module in availableModules:
+        moduleDict[module] = __import__(module)
+        moduleFuncDict[module] = dir(moduleDict[module])
+
+"""This function will test user input, to see if there is a function for it
+located in any of the available modules. Then, it will execute the command."""
+
+while True:
+    print("{0}:{1}$".format(getpass.getuser(), os.getcwd()), end=" ")
+    userCommand = input()
+    userCommandList = userCommand.split()
+    if userCommand:
+        if userCommand == 'kill' or userCommand == 'exit' or userCommand == 'quit':
+            raise SystemExit('Quitting shell.')
+        commandFound = False
+        command = userCommandList[0]
+        for key, module in moduleDict.items():
+            for submodule in dir(module):
+                if command == submodule:
+                    args = userCommandList[1:]
+                    mod = getattr(module, command)
+                    func = getattr(mod, command)(*args)
+                    commandFound = True
+        if commandFound == False:
+            foundSimilar = False
+            for key, module in moduleDict.items():
+                if difflib.get_close_matches(userCommand, dir(module)):
+                    foundSimilar = True
+                    print("No command {0} found, but there were {1} similar ones"
+                    "\n from module {2}"
+                    .format(userCommand, len(difflib.get_close_matches(userCommand, dir(module))), module.__name__))
+                    for item in difflib.get_close_matches(userCommand, dir(module)):
+                        print(item)
+            if not foundSimilar:
+                print('Command {} was not found'.format(userCommand))
+
+    else:
+        pass
