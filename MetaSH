@@ -47,7 +47,7 @@ while True:
                 if difflib.get_close_matches(userCommand, dir(module)):
                     foundSimilar = True
                     print("No command {0} found, but there were {1} similar ones"
-                    "\n from module {2}"
+                    "\n from package {2}"
                     .format(userCommand, len(difflib.get_close_matches(userCommand, dir(module))), module.__name__))
                     for item in difflib.get_close_matches(userCommand, dir(module)):
                         print(item)
