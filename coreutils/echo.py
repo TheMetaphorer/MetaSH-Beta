@@ -28,7 +28,14 @@ def echo(*args):
             if item[0] == '@':
                 realVarName = item.replace('@', '')
                 if realVarName in setvar.variables:
-                    item = item.replace(item, str(setvar.variables[realVarName]))
+                    try:
+                        if len(setvar.variables[realVarName]) == 1:
+                            item = item.replace(item, str(setvar.variables[realVarName]))
+                        elif len(setvar.variables[realVarName]) > 1:
+                            item = item.replace(item, setvar.variables[realVarName])
+                    except Exception:
+                        item = item.replace(item, str(setvar.variables[realVarName]))
+
                 else:
                     item = item.replace(item, '')
                 nonQuotedString.append(item)

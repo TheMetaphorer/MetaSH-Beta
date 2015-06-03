@@ -12,20 +12,22 @@ from decimal import \
      Rounded, \
      Subnormal, \
      Overflow, \
-     Underflow \
+     Underflow, \
+     ConversionSyntax
 
 from coreutils import setvar
 import math
 getcontext().prec = 10
 
 def calc(*args):
+    exceptionOccured = False
     expression = []
     operatorList = ['+','-','*','/','//','%','**','sqrt','rt']
     for item in args:
         try:
             expression.append(Decimal(item))
         except Exception:
-            if item not in operatorList:
+            if item not in operatorList and item.replace('@', '') not in setvar.variables:
                 print('Argument {} is not a number'.format(item))
                 return
             else:
@@ -34,7 +36,7 @@ def calc(*args):
             realVarName = item.replace('@', '')
             try:
                 expression.append(Decimal(setvar.variables[realVarName]))
-            except ValueError:
+            except Exception:
                 print('Argument {} is not a number'.format(setvar.variables[realVarName]))
                 return
         elif item in operatorList:

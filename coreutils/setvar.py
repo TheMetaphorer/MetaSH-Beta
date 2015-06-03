@@ -24,8 +24,10 @@ def setvar(*varInfo):
                 return False
         else:
             variables[name] = str(value)
-
-
+    elif varInfo and len(varInfo) > 3:
+        name = varInfo[0]
+        value = varInfo[2:]
+        variables[name] = ' '.join(list(value))
     else:
         print("""\
         Usage: setvar [name] = [value]
