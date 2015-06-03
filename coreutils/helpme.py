@@ -5,7 +5,7 @@ from coreutils import setvar
 def helpme(*command):
     if command and len(command) == 1:
         filename = command[0]
-        docPath = os.path.join(setvar.variables['executableDir'], 'MetaSH-Beta.wiki')
+        docPath = os.path.join(setvar.variables['executableDir'], 'MetaSH-Beta')
         try:
             with open('{0}/{1}.md'.format(docPath, filename), 'r') as f:
                 for line in f.readlines():
