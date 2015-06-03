@@ -9,7 +9,8 @@ variables = {'platform' : sys.platform, 'user' : getpass.getuser(),
  'executableDirectory' : os.path.dirname(os.path.abspath(__file__)),
   'date' : datetime.datetime.now().strftime("%a %b %d %H:%M:%S %Y"),
   'home' : os.path.expanduser('~'),
-  'executableDir' : os.path.dirname(coreutils.__file__).replace('coreutils', '')
+  'executableDir' : os.path.dirname(coreutils.__file__).replace('coreutils', ''),
+  'last' : '',
  }
 
 def setvar(*varInfo):

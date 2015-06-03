@@ -7,11 +7,12 @@ import inspect
 import sys
 import difflib
 
+
 moduleDict = {}
 moduleFuncDict = {}
 availableModules = ['netutils', 'coreutils', 'mathcoms']
 executableDir = os.path.dirname(__file__)
-shellVer = 'b0.1.0'
+shellVer = 'b0.2.0'
 print('MetaSH shell v' + shellVer)
 print(datetime.datetime.now().strftime('%Y-%m-%d'))
 

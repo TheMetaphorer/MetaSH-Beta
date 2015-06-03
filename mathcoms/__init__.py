@@ -2,3 +2,5 @@
 
 """Package for in-shell mathematical expressions and commands. The directory for
 this initialization module is mathcoms/__init__.py"""
+
+from mathcoms import calc
