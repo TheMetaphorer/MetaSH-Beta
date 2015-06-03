@@ -15,10 +15,3 @@ def mkdir(*dirPath):
         print("""\
         Usage: mkdir [path/to/dir]
         """)
-def helpme():
-    info = ("""\
-    Usage: mkdir [path/to/dir]
-    """)
-    return info
-if __name__ == '__main__':
-    exit()

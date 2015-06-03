@@ -23,7 +23,3 @@ def listdir(*dirPath):
     elif not dirPath:
         for item in os.listdir(os.getcwd()):
             print(item)
-
-
-if __name__ == '__main__':
-    exit()

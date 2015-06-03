@@ -16,11 +16,3 @@ def cd(*dirPath):
         except PermissionError:
             print('You don\'t have permission to directory {}'.format(location))
     helpme()
-
-def helpme():
-    info = ("""\
-    Usage: cd [directory]
-    This will not work if the
-    directory does not exist.
-    """)
-    return info
