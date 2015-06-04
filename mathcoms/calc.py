@@ -23,6 +23,9 @@ def calc(*args):
     exceptionOccured = False
     expression = []
     operatorList = ['+','-','*','/','//','%','**','sqrt','rt']
+    if len(args) == 0:
+        print('Usage: calc [mathematical expression]')
+        return
     for item in args:
         try:
             expression.append(Decimal(item))
