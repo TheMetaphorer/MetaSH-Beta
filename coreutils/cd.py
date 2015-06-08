@@ -8,16 +8,8 @@ def cd(*dirPath):
             location = []
             location_ = dirPath[0].split('/')
             for item in location_:
-                if item[0] == '@':
-                    realVarName = item.replace('@', '')
-                    item = item.replace(item, setvar.variables[realVarName])
-                    print(item)
                     location.append(item)
                     location.append('/')
-                else:
-                    location.append(item)
-                    location.append('/')
-                    pass
             location = ''.join(location)
             if location[0] == '/':
                 os.chdir(location)

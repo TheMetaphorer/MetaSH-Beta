@@ -30,23 +30,16 @@ def calc(*args):
         try:
             expression.append(Decimal(item))
         except Exception:
-            if item not in operatorList and item.replace('@', '') not in setvar.variables:
+            if item not in operatorList:
                 print('Argument {} is not a number'.format(item))
                 return
             else:
+                expression.append(item)
                 pass
-        if item[0] == '@':
-            realVarName = item.replace('@', '')
-            try:
-                expression.append(Decimal(setvar.variables[realVarName]))
-            except Exception:
-                print('Argument {} is not a number'.format(setvar.variables[realVarName]))
-                return
-        elif item in operatorList:
-            expression.append(str(item))
     while len(expression) != 1:
         for item in expression:
             exceptionOccured = False
+            print(expression)
             try:
                 operatorIndex = expression.index(item)
                 if item == 'sqrt' or item == 'rt':
@@ -121,6 +114,8 @@ def calc(*args):
                     expression.remove(subtractor1)
                     expression.remove(subtractor2)
                     expression.remove(item)
+                else:
+                    pass
             except Overflow:
                 print(Decimal('Infinity'))
                 exceptionOccured = True
@@ -139,6 +134,7 @@ def calc(*args):
             except Subnormal:
                 print('Decimal Subnormal error.')
                 exceptionOccured = True
+        break
     if not exceptionOccured:
         print(expression[0])
     if exceptionOccured:

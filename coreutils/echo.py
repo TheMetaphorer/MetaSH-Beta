@@ -60,16 +60,8 @@ def echo(*args):
                         return quotedString
                 nonQuotedString = []
                 for item in newString:
-                    if item[0] == '@':
-                        realVarName = item.replace('@', '')
-                        if realVarName in setvar.variables:
-                            item = item.replace(item, str(setvar.variables[realVarName]))
-                        else:
-                            item = item.replace(item, '')
                         nonQuotedString.append(item)
                         pass
-                    else:
-                        nonQuotedString.append(item)
                 f.write(' '.join(nonQuotedString))
                 f.close()
             return ' '.join(nonQuotedString)

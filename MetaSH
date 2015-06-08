@@ -12,7 +12,7 @@ moduleDict = {}
 moduleFuncDict = {}
 availableModules = ['netutils', 'coreutils', 'mathcoms']
 executableDir = os.path.dirname(__file__)
-shellVer = 'b0.2.3'
+shellVer = 'b0.2.5'
 print('MetaSH shell v' + shellVer)
 print(datetime.datetime.now().strftime('%Y-%m-%d'))
 
@@ -35,10 +35,22 @@ while True:
             raise SystemExit('Quitting shell.')
         commandFound = False
         command = userCommandList[0]
+        args = userCommandList[1:]
+        for item in args:
+            if item[0] == '@':
+                realVarName = item.replace('@', '')
+                try:
+                    item_ = item.replace(item, str(moduleDict['coreutils'].setvar.variables[realVarName]))
+                    itemIndex = args.index(item)
+                    args.insert(itemIndex + 1, item_)
+                    args.remove(item)
+                except KeyError:
+                    item = item.replace(item, '')
+        print(args)
         for key, module in moduleDict.items():
             for submodule in dir(module):
                 if command == submodule:
-                    args = userCommandList[1:]
+
                     mod = getattr(module, command)
                     func = getattr(mod, command)(*args)
                     commandFound = True

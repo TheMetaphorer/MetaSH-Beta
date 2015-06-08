@@ -5,13 +5,6 @@ from coreutils import setvar
 
 def listdir(*dirPath):
     if dirPath:
-        if dirPath[0][0] == '@':
-            try:
-                newDirPath = dirPath[0].replace(dirPath[0], setvar.variables[dirPath[0].replace('@', '')])
-            except KeyError:
-                return
-        else:
-            newDirPath = dirPath[0]
         try:
             directoryContents = os.listdir(newDirPath)
             for item in directoryContents:
